@@ -14,14 +14,26 @@ function AuthButton() {
     return (
       <>
         {session?.user?.name} <br />
-        <button onClick={() => signOut()}>Sign out</button>
+        
+        <button
+          // ref={`/api/auth/logout`}
+          onClick={(e) => {
+          e.preventDefault();
+          signOut({
+            callbackUrl: `/api/auth/logout`,
+          });
+        }}>Sign out</button>
       </>
     );
   }
   return (
     <>
       Not signed in <br />
-      <button onClick={() => signIn()}>Sign in</button>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          signIn("keycloak");
+        }}>Sign in</button>
     </>
   );
 }

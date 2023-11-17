@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth";
 export default async function ProtectedRoute() {
   const session = await getServerSession();
   if (!session || !session.user) {
+    console.log('Session ProtectedRoute : ', session);
     redirect("/api/auth/signin");
   }
 

@@ -1,16 +1,8 @@
-import { getServerSession } from "next-auth";
+"use client";
+import { useSession } from "next-auth/react";
 
-export default async function Home() {
-  const session = await getServerSession();
-
-  return (
-    <>
-      getServerSession Result
-      {session?.user?.name ? (
-        <div>{session?.user?.name}</div>
-      ) : (
-        <div>Not logged in</div>
-      )}
-    </>
-  );
+export default function Home() {
+  const { data: session } = useSession({ required: false });
+  console.log(session);
+  return <main>You are now authenticated!</main>;
 }

@@ -2,7 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { getServerSession } from "next-auth";
-
+import Providers from "../app/providers";
 import SessionProvider from "./components/SessionProvider";
 import NavMenu from "./components/NavMenu";
 
@@ -19,16 +19,18 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const session = await getServerSession();
-
+  if (session) {
+    console.log('Session : ', session);
+  }
   return (
     <html lang="en">
       <body className={inter.className}>
-        <SessionProvider session={session}>
+        <Providers>
           <main className="mx-auto max-w-5xl text-2xl flex gap-2 text-white">
             <NavMenu />
             {children}
           </main>
-        </SessionProvider>
+        </Providers>
       </body>
     </html>
   );

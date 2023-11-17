@@ -7,8 +7,12 @@ export default function APITestPage() {
   useEffect(() => {
     fetch("/api/whoAmI")
       .then((res) => res.json())
-      .then((data) => setName(data.name));
+      .then((data) => {
+        console.log("Data from API:", data);
+        setName(data.name);
+      });
   }, []);
+
 
   return (
     <div>
